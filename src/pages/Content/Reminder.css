@@ -1,11 +1,16 @@
 .reminderModal {
+    position: fixed;
     box-sizing: border-box;
-    margin: 100px auto 0 auto;
+    top: 100px;
+    margin: auto;
     background-color: #D9F3D2;
     text-align: center;
     width: 500px;
     height: 300px;
     padding: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999999;
 }
 
 /*------------------------------------------------------------*/
@@ -26,6 +31,10 @@
     margin-right: 15px;
 }
 
+.speechBubble {
+    
+}
+
 .timerContainer {
     width: 60%;
     background-color: yellow;
@@ -37,8 +46,8 @@
 
 }
 
-.controls {
-
+.controls i {
+    padding: 0 10px;
 }
 
 /*------------------------------------------------------------*/

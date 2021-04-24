@@ -12,13 +12,14 @@ console.log('Must reload extension for modifications to take effect.');
 
 printLine("Using the 'printLine' function from the Print Module");
 
-// setInterval(async () => {
-//   const nextRestTime = await getNextRestTime();
-//   const current = moment();
-//   console.debug(nextRestTime);
-//   if (nextRestTime >= current) {
-//   }
-// }, 5000);
+ setInterval(async () => {
+   const nextRestTime = await getNextRestTime();
+   const current = moment();
+   console.debug(nextRestTime);
+   if (nextRestTime >= current) {
+   }
+    chrome.action.setBadgeText({ text: nextRestTime.format('HH:mm') });
+}, 5000);
 console.log('hey here0');
 
 const body = document.body;

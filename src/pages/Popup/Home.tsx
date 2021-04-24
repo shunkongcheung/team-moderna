@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import { getNextRestTime } from '../../logics';
+
 import './Home.css';
 
 interface HomeProps {
@@ -7,12 +9,14 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ handleEdit }) => {
+  const nextRestTime = getNextRestTime();
   return (
     <div className="home-container">
       <div className="home-content">
         <div className="clock" />
         <h1 className="home-heading">
-          Your next break will be at <i className="bi bi-alarm"></i> 12:03
+          Your next break will be at <i className="bi bi-alarm"></i>{' '}
+          {nextRestTime.format('HH:mm')}
         </h1>
         <h2 className="home-caption"> You have rested for 15 minutes today</h2>
         <button className="home-edit-btn" onClick={handleEdit}>

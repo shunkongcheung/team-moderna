@@ -1,9 +1,21 @@
 import getLastRestTime from './getLastRestTime';
 
-const getNextRestTime = () => {
-  const lastRestTime = getLastRestTime();
-  const workHour = window.localStorage.getItem('workHour');
-  const workMinute = window.localStorage.getItem('workMinute');
+const getWorkValues = async (): Promise<{
+  workHour: number;
+  workMinute: number;
+}> => {
+  return new Promise((resolve) => {
+    chrome.storage.local.get(['workHour', 'workMinute'], (result: any) =>
+      resolve(result)
+    );
+  });
+};
+
+const getNextRestTime = async () => {
+  const [lastRestTime, { workHour, workMinute }] = await Promise.all([
+    getLastRestTime(),
+    getWorkValues(),
+  ]);
 
   lastRestTime.add(workHour, 'hours');
   lastRestTime.add(workMinute, 'minutes');

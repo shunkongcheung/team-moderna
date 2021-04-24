@@ -3,7 +3,7 @@ import React from 'react';
 import Home from './Home';
 import Form from './Form';
 
-import {setRestTime} from '../../logics';
+import { setRestTime } from '../../logics';
 
 import './Popup.css';
 
@@ -15,11 +15,12 @@ enum Page {
 const Popup = () => {
   const [page, setPage] = React.useState<Page>(Page.Home);
 
-	React.useEffect(() => {
-		// if no previous rest time. set now as previous rest time
-		const restTimeStr = window.localStorage.getItem('REST_TIME')
-		if (!restTimeStr) setRestTime()
-	}, [])
+  React.useEffect(() => {
+    // if no previous rest time. set now as previous rest time
+    chrome.storage.local.get(['REST_TIME'], ({ REST_TIME }) => {
+      if (!REST_TIME) setRestTime();
+    });
+  }, []);
 
   return (
     <div

@@ -26,11 +26,17 @@ interface FormValue {
 
 const Form: React.FC<FormProps> = ({ handleFinish }) => {
   const [formValue, setFv] = React.useState<FormValue>({
-    workHour: 0,
-    workMinute: 30,
-    restMinute: 1,
-    mode: Mode.NORMAL,
+    workHour: Number(window.localStorage.getItem('workHour')),
+    workMinute: Number(window.localStorage.getItem('workMinute')),
+    restMinute: Number(window.localStorage.getItem('restMinute')),
+    mode: window.localStorage.getItem('mode') as Mode,
   });
+
+  React.useEffect(() => {
+    Object.entries(formValue).map(([key, value]) =>
+      window.localStorage.setItem(key, value)
+    );
+  }, [formValue]);
 
   return (
     <div className="form-container p-3">

@@ -3,6 +3,7 @@
   "name": "Break O'clock",
   "options_page": "options.html",
   "background": { "service_worker": "background.bundle.js" },
+  "version": "4.0.2",
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"

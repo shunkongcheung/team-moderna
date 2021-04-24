@@ -30,3 +30,9 @@ label {
   background: transparent;
   color: #dfdfdf;
 }
+
+.flex-switch {
+ display: flex;
+ justify-content: space-between;
+ padding-left: 12px;
+}

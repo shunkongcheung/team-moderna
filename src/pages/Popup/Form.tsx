@@ -22,19 +22,21 @@ interface FormValue {
   workMinute: number;
   restMinute: number;
   mode: Mode;
+  reminder: boolean;
 }
 
 const Form: React.FC<FormProps> = ({ handleFinish }) => {
   const [formValue, setFv] = React.useState<FormValue>({
-    workHour: 0,
+    workHour: 1,
     workMinute: 0,
-    restMinute: 0,
+    restMinute: 10,
     mode: Mode.NORMAL,
+    reminder: true,
   });
 
   React.useEffect(() => {
     chrome.storage.local.get(
-      ['workHour', 'workMinute', 'restMinute', 'mode'],
+      ['workHour', 'workMinute', 'restMinute', 'mode', 'reminder'],
       (result) => {
         setFv(result as FormValue);
       }
@@ -51,93 +53,77 @@ const Form: React.FC<FormProps> = ({ handleFinish }) => {
     <div className="form-container p-3">
       <div className="form-content">
         <div className="mb-3 row pr-0">
-          <label htmlFor="interval" className="col-6 col-form-label">
-            Your working period
-          </label>
-          <div className="row col-6">
-            <div className="col-6 pr-0">
-              <input
-                className="form-control"
-                type="number"
-                id="workHour"
-                min="0"
-                max="2"
-                value={formValue.workHour}
-                onChange={({ target }) =>
-                  setFv((o) => ({ ...o, workHour: Number(target.value) }))
-                }
-              />
-            </div>
-            <div className="col-6 pr-0">
-              <input
-                className="form-control"
-                type="number"
-                id="workMinute"
-                min="0"
-                max="30"
-                step="5"
-                value={formValue.workMinute}
-                onChange={({ target }) =>
-                  setFv((o) => ({ ...o, workMinute: Number(target.value) }))
-                }
-              />
-            </div>
-          </div>
-          <div id="workHelp" className="form-text">
-            You are going to work for {formValue.workHour} hour(s) and{' '}
-            {formValue.workMinute} minutes(s) before taking a rest.
-          </div>
-        </div>
-        <div className="mb-3 row">
-          <label htmlFor="duration" className="col-6 col-form-label">
-            Duration of your break
-          </label>
-          <div className="col-6">
-            <input
-              type="number"
-              className="form-control"
-              id="restMinute"
-              name="restMinute"
-              min="1"
-              max="30"
-              step="1"
-              value={formValue.restMinute}
-              onChange={({ target }) =>
-                setFv((o) => ({ ...o, restMinute: Number(target.value) }))
-              }
+          <div className="form-check form-switch flex-switch">
+            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable break reminder</label>
+            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={formValue.reminder} 
+              onChange={() => setFv((o) => ({ ...o, reminder: !formValue.reminder }))}
             />
           </div>
-          <div id="restHelp" className="form-text">
-            Take a break of {formValue.restMinute} minute(s). take it easy!
+          <div id="workHelp" className="form-text">
+            {console.log(formValue)}
+            <p><small>
+              You {formValue.reminder ? 'will' : `won't`} get a notification message when the timer stops.
+            </small></p>
           </div>
-        </div>
-        <div className="mb-3 row">
-          <label htmlFor="mode" className="col-6 col-form-label">
-            Mode
-          </label>
-          <div className="col-6">
-            <select
-              className="form-select"
-              aria-label="Mode"
-              name="mode"
-              value={formValue.mode}
-              onChange={({ target }) =>
-                setFv((o) => ({ ...o, mode: target.value as Mode }))
-              }
-            >
-              <option value={Mode.HIGH}>Regular days</option>
-              <option value={Mode.NORMAL}>Monday</option>
-              <option value={Mode.LOW}>Deadline fighter</option>
-            </select>
           </div>
-          <div id="modeHelp" className="form-text">
-            {ModeHelpText[formValue.mode]}
+          <div className="mb-3 row pr-0">
+            <label htmlFor="interval" className="col-8 col-form-label">
+              Break Inteval
+            </label>
+            <div className="col-4">
+              <select
+                className="form-select form-select-sm" 
+                aria-label=".form-select-sm example"
+                onChange={({ target }) => {
+                  if(target.value === "30") {
+                    setFv((o) => ({ ...o, workMinute: Number(target.value), workHour: 0  }))  
+                  } else {
+                    setFv((o) => ({ ...o, workHour: Number(target.value), workMinute: 0 }))
+                  }
+                }}
+              >
+                <option value="30" selected={formValue.workMinute === 30}>30 min</option>
+                <option value="1" selected={formValue.workHour === 1}>1 h</option>
+                <option value="2" selected={formValue.workHour === 2}>2 h</option>
+              </select>
+            </div>
+            <div id="workHelp" className="form-text">
+              {console.log(formValue)}
+              <p><small>
+                You are going to work for {formValue.workHour == 0 ? `${formValue.workMinute} min` : `${formValue.workHour} hour${formValue.workHour > 1 ? 's' : ''}` }
+                {' '}before taking a break.
+              </small></p>
+            </div>
           </div>
-        </div>
-        <button className="form-finish-btn ps-0 mt-3" onClick={handleFinish}>
-          <i className="bi bi-arrow-left"></i>{' '}
-          Back
-        </button>
+
+          <div className="mb-3 row">
+            <label htmlFor="duration" className="col-8 col-form-label">
+              Break duration
+            </label>
+            <div className="col-4">
+              <select 
+                className="form-select form-select-sm" 
+                aria-label=".form-select-sm example"
+                onChange={({ target }) =>
+                  setFv((o) => ({ ...o, restMinute: Number(target.value) }))
+                }
+              >
+                <option value="10" selected={formValue.restMinute === 10}>10 min</option>
+                <option value="15" selected={formValue.restMinute === 15}>15 min</option>
+                <option value="20" selected={formValue.restMinute === 20}>20 min</option>
+              </select>
+            </div>
+            <div id="restHelp" className="form-text">
+              <p><small>
+                Take a break of {formValue.restMinute} minutes. take it easy!
+              </small></p>
+            </div>
+          </div>
+
+          <button className="form-finish-btn ps-0 mt-3" onClick={handleFinish}>
+            <i className="bi bi-arrow-left"></i>{' '}
+            Back
+          </button>
       </div>
     </div>
   );

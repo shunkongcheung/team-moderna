@@ -1,8 +1,11 @@
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
-const getLastRestTime = () => {
-  const lastRestStr = window.localStorage.getItem('REST_TIME') as string;
-  return moment(lastRestStr);
+const getLastRestTime = async (): Promise<Moment> => {
+  return new Promise((resolve) => {
+    chrome.storage.local.get(['REST_TIME'], ({ REST_TIME }) => {
+      resolve(moment(REST_TIME));
+    });
+  });
 };
 
 export default getLastRestTime;

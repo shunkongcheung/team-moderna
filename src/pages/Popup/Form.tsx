@@ -26,15 +26,24 @@ interface FormValue {
 
 const Form: React.FC<FormProps> = ({ handleFinish }) => {
   const [formValue, setFv] = React.useState<FormValue>({
-    workHour: Number(window.localStorage.getItem('workHour')),
-    workMinute: Number(window.localStorage.getItem('workMinute')),
-    restMinute: Number(window.localStorage.getItem('restMinute')),
-    mode: window.localStorage.getItem('mode') as Mode,
+    workHour: 0,
+    workMinute: 0,
+    restMinute: 0,
+    mode: Mode.NORMAL,
   });
 
   React.useEffect(() => {
+    chrome.storage.local.get(
+      ['workHour', 'workMinute', 'restMinute', 'mode'],
+      (result) => {
+        setFv(result as FormValue);
+      }
+    );
+  }, []);
+
+  React.useEffect(() => {
     Object.entries(formValue).map(([key, value]) =>
-      window.localStorage.setItem(key, value)
+      chrome.storage.local.set({ [key]: value })
     );
   }, [formValue]);
 

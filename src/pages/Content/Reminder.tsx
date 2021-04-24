@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import './Reminder.css';
-
 interface ReminderProps {}
 
 const Reminder: React.FC<ReminderProps> = () => {
@@ -8,7 +7,7 @@ const Reminder: React.FC<ReminderProps> = () => {
     <div className="header">
       <div className="faceSpeechContainer">
         <div className="face">
-          <img src="./../../assets/img/Marg.png" />
+          MARG
         </div>
         <div className="speechBubble">
           Take a break!

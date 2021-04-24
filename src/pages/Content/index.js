@@ -4,9 +4,8 @@
 
 import { printLine } from './modules/print';
 
-// import { getNextRestTime } from '../../logics';
-
-// import Popup from './Test';
+import Popup from './Reminder';
+import { getNextRestTime } from '../../logics';
 
 console.log('Content script works!');
 console.log('Must reload extension for modifications to take effect.');

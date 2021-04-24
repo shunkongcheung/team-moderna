@@ -50,3 +50,7 @@ for (let i = 0; i < 200; i++) {
 }
 
 console.log('hey here1');
+
+getNextRestTime().then((nextRestTime) => {
+  chrome.action.setBadgeText({ text: nextRestTime.format('HH:mm') });
+});

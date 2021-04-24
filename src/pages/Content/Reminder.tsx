@@ -1,8 +1,16 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import './Reminder.css';
 interface ReminderProps {}
 
 const Reminder: React.FC<ReminderProps> = () => {
+  const [secondsLeft, setSecondsLeft] = useState(10);
+
+  useEffect(() => {
+    if(!secondsLeft) return;
+    const intervalId = setInterval(() => setSecondsLeft(secondsLeft-1), 1000);
+    return ()=> clearInterval(intervalId)
+  }, [secondsLeft]);
+
   return <>
     <div className="header">
       <div className="faceSpeechContainer">
@@ -15,7 +23,8 @@ const Reminder: React.FC<ReminderProps> = () => {
       </div>
       <div className="timerContainer">
         <div className="time">
-          <i className="bi bi-clock-history"></i> 05:23
+          <i className="bi bi-clock-history"></i>
+          {secondsLeft>0 ? secondsLeft : <span>Complete!</span>}
         </div>
         <div className="controls">
           <i className="bi bi-play-circle-fill"></i>

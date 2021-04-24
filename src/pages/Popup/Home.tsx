@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import moment from 'moment';
 
 import { getNextRestTime } from '../../logics';
 
@@ -9,7 +10,17 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ handleEdit }) => {
-  const nextRestTime = getNextRestTime();
+  const [nextRestTime, setNextRestTime] = React.useState(moment());
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      getNextRestTime().then(setNextRestTime);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
   return (
     <div className="home-container">
       <div className="home-content">

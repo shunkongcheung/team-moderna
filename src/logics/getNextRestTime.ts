@@ -1,14 +1,14 @@
-import getLastRestTime from './getLastRestTime'
+import getLastRestTime from './getLastRestTime';
 
 const getNextRestTime = () => {
-	const lastRestTime  = getLastRestTime()
-	const workHour = window.localStorage.getItem('workHour')
-	const workMinute = window.localStorage.getItem('workMinute')
+  const lastRestTime = getLastRestTime();
+  const workHour = window.localStorage.getItem('workHour');
+  const workMinute = window.localStorage.getItem('workMinute');
 
-	lastRestTime.add(workHour, 'hours')
-	lastRestTime.add(workMinute, 'minutes')
+  lastRestTime.add(workHour, 'hours');
+  lastRestTime.add(workMinute, 'minutes');
 
-	return lastRestTime;
+  return lastRestTime;
 };
 
 export default getNextRestTime;

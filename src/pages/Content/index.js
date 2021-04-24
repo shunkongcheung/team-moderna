@@ -47,17 +47,7 @@ for (let i = 0; i < 200; i++) {
   // myEle.style['animation-delay'] = `-${Math.floor(Math.random() * 10)}s`;
 
   document.body.insertBefore(myEle, document.body.firstChild);
-
-  var head = document.getElementsByTagName('HEAD')[0]; 
-  var link = document.createElement('link');
-  link.rel = 'stylesheet'; 
-  link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css';
-  head.appendChild(link); 
-
-  const popupEle = document.createElement('div');
-  popupEle.setAttribute("class", "reminderModal");
-  document.body.insertBefore(myEle, document.body.firstChild);
-  render(<Popup />, myEle);
+  // render(<Popup />, myEle);
 }
 
 console.log('hey here1');
@@ -65,15 +55,20 @@ console.log('hey here1');
 getNextRestTime().then((nextRestTime) => {
   chrome.action.setBadgeText({ text: nextRestTime.format('HH:mm') });
 });
+// setInterval(async () => {
+//   const nextRestTime = await getNextRestTime();
+//   const current = moment();
+//   console.debug(nextRestTime);
+//   if (nextRestTime >= current) {
+    var head = document.getElementsByTagName('HEAD')[0]; 
+    var link = document.createElement('link');
+    link.rel = 'stylesheet'; 
+    link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css';
+    head.appendChild(link); 
 
-
-var head = document.getElementsByTagName('HEAD')[0]; 
-var link = document.createElement('link');
-link.rel = 'stylesheet'; 
-link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css';
-head.appendChild(link); 
-
-const popupEle = document.createElement('div');
-popupEle.setAttribute("class", "reminderModal");
-document.body.insertBefore(myEle, document.body.firstChild);
-render(<Popup />, myEle);
+    const popupEle = document.createElement('div');
+    popupEle.setAttribute("class", "reminderModal");
+    document.body.insertBefore(popupEle, document.body.firstChild);
+    render(<Popup />, popupEle);
+//   }
+// }, 5000);

@@ -1,0 +1,29 @@
+.form-container {
+  background: url('./form-background.jpg');
+  background-size: cover;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-content {
+  width: 80%;
+  height: 80%;
+}
+
+label {
+  color: #fdfdfd;
+  font-weight: bold;
+}
+
+.form-text {
+  color: #dfdfdf;
+}
+
+.form-finish-btn {
+  border: none;
+  background: transparent;
+  color: #dfdfdf;
+}

@@ -1,0 +1,47 @@
+.home-container {
+  width: 100%;
+  height: 100vh;
+  background: url('./home-background.png');
+  background-size: cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-content {
+  width: 90%;
+  height: 70%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clock {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  width: 40%;
+  padding-bottom: 40%;
+  background: url('./clock.png');
+  background-size: cover;
+}
+
+.home-heading {
+  color: #fdfdfd;
+  font-size: 24px;
+  text-align: center;
+}
+
+.home-caption {
+  color: #dfdfdf;
+  font-size: 17px;
+  text-align: center;
+}
+
+.home-edit-btn {
+  border: none;
+  background: transparent;
+  color: #dfdfdf;
+}

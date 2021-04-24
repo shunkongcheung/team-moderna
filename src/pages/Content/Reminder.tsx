@@ -30,11 +30,25 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
     setRestTime();
   };
 
+  let intervalId: any;
   useEffect(() => {
-    if (!secondsLeft) return;
-    const intervalId = setInterval(() => setSecondsLeft(secondsLeft - 1), 1000);
+    console.log('hey ennntering here');
+    intervalId = setInterval(() => {
+      setSecondsLeft((left) => {
+        const next = left - 1;
+
+        // lets reset the time
+        if (next <= 0) {
+          setRestTime();
+          handleClose();
+          clearInterval(intervalId);
+          intervalId = 0;
+        }
+        return next;
+      });
+    }, 1000);
     return () => clearInterval(intervalId);
-  }, [secondsLeft]);
+  }, []);
 
   return (
     <>

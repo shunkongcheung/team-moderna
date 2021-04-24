@@ -62,9 +62,11 @@ setInterval(async () => {
   const nextRestTime = await getNextRestTime();
   const current = moment();
 
+  const myEle = document.getElementsByClassName('snowflake');
+
   // diff in second
   const diff = (nextRestTime - current) / 1000;
-  if (diff < 55) {
+  if (diff < 5 && !myEle.length) {
     oldBackground = renderSnow();
     renderModal(oldBackground);
   }

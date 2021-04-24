@@ -7,7 +7,7 @@ const Reminder: React.FC<ReminderProps> = () => {
     <div className="header">
       <div className="faceSpeechContainer">
         <div className="face">
-          MARG
+          <i className="bi bi-hourglass-bottom"></i>
         </div>
         <div className="speechBubble">
           Take a break!
@@ -15,7 +15,7 @@ const Reminder: React.FC<ReminderProps> = () => {
       </div>
       <div className="timerContainer">
         <div className="time">
-          05:23
+          <i className="bi bi-clock-history"></i> 05:23
         </div>
         <div className="controls">
           <i className="bi bi-play-circle-fill"></i>

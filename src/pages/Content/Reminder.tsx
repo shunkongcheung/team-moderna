@@ -5,6 +5,7 @@ import './Reminder.css';
 interface ReminderProps {
   oldBackground: string;
 }
+import { getRestMinute } from '../../logics';
 
 const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
   const [secondsLeft, setSecondsLeft] = useState(10);

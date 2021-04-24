@@ -1,0 +1,56 @@
+.reminderModal {
+    box-sizing: border-box;
+    margin: 100px auto 0 auto;
+    background-color: #D9F3D2;
+    text-align: center;
+    width: 500px;
+    height: 300px;
+    padding: 50px;
+}
+
+/*------------------------------------------------------------*/
+.header {
+    display: flex;
+}
+
+.faceSpeechContainer {
+    width: 40%;
+    color: purple;
+    display: flex;
+    flex-direction: space-between;
+    align-items: center;
+}
+
+.face img {
+    max-width: 60px;
+    margin-right: 15px;
+}
+
+.timerContainer {
+    width: 60%;
+    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+}
+
+.time {
+
+}
+
+.controls {
+
+}
+
+/*------------------------------------------------------------*/
+
+.numberOfBreaks {
+    text-align: left;
+    padding: 50px 0 20px 0;
+}
+
+/*------------------------------------------------------------*/
+
+.quote {
+    text-align: left;
+    padding: 20px 0 20px 0;
+}

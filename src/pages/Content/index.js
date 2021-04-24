@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import { printLine } from './modules/print';
 
-import Popup from './Test';
+import Popup from './Reminder';
 
 console.log('Content script works!');
 console.log('Must reload extension for modifications to take effect.');

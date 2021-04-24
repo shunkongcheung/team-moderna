@@ -134,11 +134,9 @@ const Form: React.FC<FormProps> = ({ handleFinish }) => {
             {ModeHelpText[formValue.mode]}
           </div>
         </div>
-        <button className="form-finish-btn" onClick={handleFinish}>
+        <button className="form-finish-btn ps-0 mt-3" onClick={handleFinish}>
+          <i className="bi bi-arrow-left"></i>{' '}
           Back
-          <span className="scroll-arrow">&lt;</span>
-          <span className="scroll-arrow">&lt;</span>
-          <span className="scroll-arrow">&lt;</span>
         </button>
       </div>
     </div>

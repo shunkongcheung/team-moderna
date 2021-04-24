@@ -1,14 +1,14 @@
-import React, { memo } from 'react';
-
+import React, { memo, useEffect, useState } from 'react';
 import { setRestTime } from '../../logics';
 
 import './Reminder.css';
-
 interface ReminderProps {
   oldBackground: string;
 }
 
 const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
+  const [secondsLeft, setSecondsLeft] = useState(10);
+
   const unrenderSnow = (oldBackground: string) => {
     const elements = document.getElementsByClassName('snowflake');
     while (elements.length > 0) {
@@ -30,6 +30,12 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
     setRestTime();
   };
 
+  useEffect(() => {
+    if (!secondsLeft) return;
+    const intervalId = setInterval(() => setSecondsLeft(secondsLeft - 1), 1000);
+    return () => clearInterval(intervalId);
+  }, [secondsLeft]);
+
   return (
     <>
       <div className="header">
@@ -41,12 +47,13 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
         </div>
         <div className="timerContainer">
           <div className="time">
-            <i className="bi bi-clock-history"></i> 05:23
+            <i className="bi bi-clock-history"></i>
+            {secondsLeft > 0 ? secondsLeft : <span>Complete!</span>}
           </div>
           <div className="controls">
             <i className="bi bi-play-circle-fill"></i>
             <i className="bi bi-stop-circle-fill"></i>
-            <i className="bi bi-stop-circle-fill" onClick={handleClose}></i>
+            <i className="bi bi-stop-circle-fill"></i>
           </div>
         </div>
       </div>

@@ -29,12 +29,10 @@ const Home: React.FC<HomeProps> = ({ handleEdit }) => {
           Your next break will be at <i className="bi bi-alarm"></i>{' '}
           {nextRestTime.format('HH:mm')}
         </h1>
-        <h2 className="home-caption"> You have rested for 15 minutes today</h2>
-        <button className="home-edit-btn" onClick={handleEdit}>
-          Edit your settings
-          <span className="scroll-arrow">&gt;</span>
-          <span className="scroll-arrow">&gt;</span>
-          <span className="scroll-arrow">&gt;</span>
+        <h2 className="home-caption">You have rested for 15 minutes today</h2>
+        <button className="home-edit-btn mt-3" onClick={handleEdit}>
+          <i className="bi bi-gear"></i>{' '}
+          Settings
         </button>
       </div>
     </div>

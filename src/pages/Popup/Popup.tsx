@@ -3,6 +3,8 @@ import React from 'react';
 import Home from './Home';
 import Form from './Form';
 
+import {setRestTime} from '../../logics';
+
 import './Popup.css';
 
 enum Page {
@@ -12,6 +14,12 @@ enum Page {
 
 const Popup = () => {
   const [page, setPage] = React.useState<Page>(Page.Home);
+
+	React.useEffect(() => {
+		// if no previous rest time. set now as previous rest time
+		const restTimeStr = window.localStorage.getItem('REST_TIME')
+		if (!restTimeStr) setRestTime()
+	}, [])
 
   return (
     <div

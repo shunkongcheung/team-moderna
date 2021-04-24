@@ -19,6 +19,9 @@ const Popup = () => {
         >
           Learn React!
         </a>
+        <button type="primary" className="btn btn-primary">
+          Button
+        </button>
       </header>
     </div>
   );

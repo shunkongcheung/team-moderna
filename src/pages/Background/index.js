@@ -24,3 +24,11 @@ setInterval(async () => {
     }
   }
 }, 5000);
+
+// chrome.runtime.onMessage.addListener((request, sender, sendResponse)=> {
+//   if(request.message === 'fetch_quote'){
+//     fetch("https://quotes.rest/")
+//       .then(res=> console.log(res))
+//       .catch(err=>console.log('Could not fetch it :('));
+//     }
+// })

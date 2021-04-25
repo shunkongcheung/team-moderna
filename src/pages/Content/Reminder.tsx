@@ -1,14 +1,16 @@
 import React, { memo, useEffect, useState } from 'react';
-import { setRestTime } from '../../logics';
+import { getRestMinute, setRestTime } from '../../logics';
 
 import './Reminder.css';
 interface ReminderProps {
   oldBackground: string;
 }
-import { getRestMinute } from '../../logics';
 
 const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
-  const [secondsLeft, setSecondsLeft] = useState(10);
+  const [secondsLeft, setSecondsLeft] = useState(16);
+//   const [data, setData] = useState(null);
+// const [loading, setLoading] = useState(true);
+// const [error, setError] = useState(null);
 
   const unrenderSnow = (oldBackground: string) => {
     const elements = document.getElementsByClassName('snowflake');
@@ -31,9 +33,36 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
     setRestTime();
   };
 
+  // useEffect(() => {
+  //   fetch("https://quotes.rest/")
+  //     .then((results) => results.json())
+  //     .then(data => {
+  //       console.log(data)
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data: ", error);
+  //       setError(error);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  //   }, []);
+
+  React.useEffect(() => {
+
+      getRestMinute().then((result)=>{
+        setSecondsLeft(result.restMinute)
+        console.log(`ehllow ${result.restMinute}`)
+        })
+
+  }, []);
+
   let intervalId: any;
   useEffect(() => {
-    console.log('hey ennntering here');
+
+    // const num = getRestMinute();
+    // console.log(`hey ennntering here ${num}`);
+    
     intervalId = setInterval(() => {
       setSecondsLeft((left) => {
         const next = left - 1;

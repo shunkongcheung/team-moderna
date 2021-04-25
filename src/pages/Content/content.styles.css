@@ -15,7 +15,7 @@
   z-index:99999;
   position: absolute;
   background: black;
-  opacity: 50%;
+  opacity: 70%;
 }
 
 @keyframes snowfall {

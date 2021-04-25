@@ -15,19 +15,20 @@ const Home: React.FC<HomeProps> = ({ handleEdit }) => {
   React.useEffect(() => {
     const interval = setInterval(() => {
       getNextRestTime().then(setNextRestTime);
-    }, 1000);
+    }, 100);
 
     return () => {
       clearInterval(interval);
     };
   }, []);
+
   return (
     <div className="home-container">
       <div className="home-content">
         <div className="clock" />
         <h1 className="home-heading">
           Your next break will be at <i className="bi bi-alarm"></i>{' '}
-          {nextRestTime.format('HH:mm')}
+          {nextRestTime.format('HH:mm A')}
         </h1>
         <h2 className="home-caption">You have rested for 15 minutes today</h2>
         <button className="home-edit-btn mt-3" onClick={handleEdit}>

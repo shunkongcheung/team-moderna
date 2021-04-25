@@ -91,7 +91,11 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
           <div className="face">
             <i className="bi bi-hourglass-bottom"></i>
           </div>
-          <div className="speechBubble">Take a break!</div>
+          <div className="speechBubble">
+            <h2>
+              Take a break!
+            </h2>
+          </div>
         </div>
         <div className="timerContainer">
           <div className="time">
@@ -115,7 +119,11 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
           </div>
         </div>
       </div>
-      <div className="numberOfBreaks">Hooray you've taken 5 breaks today!</div>
+      <div className="numberOfBreaks">
+        <p>
+          Hooray🎉🎊! You've taken 5 breaks today!
+        </p>
+      </div>
       <div className="quote">
         “Thou hast made us for thyself, O Lord, and our heart is restless until
         it finds its rest in thee.”

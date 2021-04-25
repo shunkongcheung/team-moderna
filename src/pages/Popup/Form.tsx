@@ -27,7 +27,7 @@ interface FormValue {
 
 const Form: React.FC<FormProps> = ({ handleFinish }) => {
   const [formValue, setFv] = React.useState<FormValue>({
-    workHour: 1,
+    workHour: 2,
     workMinute: 0,
     restMinute: 10,
     mode: Mode.NORMAL,
@@ -77,13 +77,14 @@ const Form: React.FC<FormProps> = ({ handleFinish }) => {
                 className="form-select form-select-sm" 
                 aria-label=".form-select-sm example"
                 onChange={({ target }) => {
-                  if(target.value === "30") {
+                  if(target.value === "30" || target.value === "1") {
                     setFv((o) => ({ ...o, workMinute: Number(target.value), workHour: 0  }))  
                   } else {
                     setFv((o) => ({ ...o, workHour: Number(target.value), workMinute: 0 }))
                   }
                 }}
               >
+                <option value="1" selected={formValue.workMinute === 1}>1 min</option>
                 <option value="30" selected={formValue.workMinute === 30}>30 min</option>
                 <option value="1" selected={formValue.workHour === 1}>1 h</option>
                 <option value="2" selected={formValue.workHour === 2}>2 h</option>

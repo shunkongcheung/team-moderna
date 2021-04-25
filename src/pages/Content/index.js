@@ -31,6 +31,10 @@ const renderSnow = () => {
   const body = document.body;
   const oldBackground = body.style.background;
   body.style.background = '#111';
+  body.style["box-shadow"]= "0 3px 7px rgba(0, 0, 0, 0.3);"
+  const bar = document.createElement('div');
+  bar.setAttribute('class', 'shadow');
+  document.body.insertBefore(bar, document.body.firstChild);
 
   for (let i = 0; i < 100; i++) {
     const myEle = document.createElement('div');

@@ -15,7 +15,10 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
     while (elements.length > 0) {
       (elements[0] as any).parentNode.removeChild(elements[0]);
     }
-    document.body.style.background = oldBackground;
+    const foo = document.getElementsByClassName('shadow');
+    while (foo.length > 0) {
+      (foo[0] as any).parentNode.removeChild(foo[0]);
+    }
   };
 
   const unrenderModal = () => {

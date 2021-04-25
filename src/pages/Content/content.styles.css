@@ -3,6 +3,19 @@
   border-radius: 50%;
   position: absolute;
   top: -5vh;
+  z-index: 99999;
+}
+
+.shadow {
+  background:"0 3px 7px rgba(0, 0, 0, 0.3);";
+  left:0;
+  top:0;
+  right:0;
+  bottom:0;
+  z-index:99999;
+  position: absolute;
+  background: black;
+  opacity: 50%;
 }
 
 @keyframes snowfall {

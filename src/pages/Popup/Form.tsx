@@ -29,7 +29,7 @@ const Form: React.FC<FormProps> = ({ handleFinish }) => {
   const [formValue, setFv] = React.useState<FormValue>({
     workHour: 1,
     workMinute: 0,
-    restMinute: 10,
+    restMinute: 1,
     mode: Mode.NORMAL,
     reminder: true,
   });
@@ -84,6 +84,7 @@ const Form: React.FC<FormProps> = ({ handleFinish }) => {
                   }
                 }}
               >
+                <option value="2" selected={formValue.workMinute === 1}>1 min</option>
                 <option value="30" selected={formValue.workMinute === 30}>30 min</option>
                 <option value="1" selected={formValue.workHour === 1}>1 h</option>
                 <option value="2" selected={formValue.workHour === 2}>2 h</option>
@@ -106,6 +107,7 @@ const Form: React.FC<FormProps> = ({ handleFinish }) => {
               <select 
                 className="form-select form-select-sm" 
                 aria-label=".form-select-sm example"
+                value={formValue.restMinute}
                 onChange={({ target }) =>
                   setFv((o) => ({ ...o, restMinute: Number(target.value) }))
                 }

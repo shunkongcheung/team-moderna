@@ -8,7 +8,7 @@ interface ReminderProps {
 import { getRestMinute } from '../../logics';
 
 const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
-  const [secondsLeft, setSecondsLeft] = useState(10);
+  const [secondsLeft, setSecondsLeft] = useState(90);
 
   const unrenderSnow = (oldBackground: string) => {
     const elements = document.getElementsByClassName('snowflake');
@@ -31,25 +31,47 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
     setRestTime();
   };
 
-  let intervalId: any;
-  useEffect(() => {
-    console.log('hey ennntering here');
-    intervalId = setInterval(() => {
-      setSecondsLeft((left) => {
-        const next = left - 1;
+  // useEffect(() => {
+  //   fetch("https://quotes.rest/")
+  //     .then((results) => results.json())
+  //     .then(data => {
+  //       console.log(data)
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data: ", error);
+  //       setError(error);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  //   }, []);
 
-        // lets reset the time
-        if (next <= 0) {
-          setRestTime();
-          handleClose();
-          clearInterval(intervalId);
-          intervalId = 0;
-        }
-        return next;
-      });
-    }, 1000);
-    return () => clearInterval(intervalId);
+  React.useEffect(() => {
+      getRestMinute().then((result)=>{
+        console.log(result.restMinute)
+        setSecondsLeft(result.restMinute)
+        })
   }, []);
+
+  let intervalId: any;
+  // useEffect(() => {
+  //   console.log('hey ennntering here');
+  //   intervalId = setInterval(() => {
+  //     setSecondsLeft((left) => {
+  //       const next = left - 1;
+
+  //       // lets reset the time
+  //       if (next <= 0) {
+  //         setRestTime();
+  //         handleClose();
+  //         clearInterval(intervalId);
+  //         intervalId = 0;
+  //       }
+  //       return next;
+  //     });
+  //   }, 1000);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   return (
     <>
@@ -63,7 +85,8 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
         <div className="timerContainer">
           <div className="time">
             <i className="bi bi-clock-history"></i>
-            {secondsLeft > 0 ? secondsLeft : <span>Complete!</span>}
+            {(secondsLeft/3) > 0 ? `${secondsLeft / 3}:` : '00:'}
+            {(secondsLeft%3) > 0 ? secondsLeft%3 : '00'}
           </div>
           <div className="controls">
             <i className="bi bi-play-circle-fill"></i>

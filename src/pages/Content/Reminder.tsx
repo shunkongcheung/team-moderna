@@ -9,6 +9,7 @@ import { getRestMinute } from '../../logics';
 
 const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
   const [secondsLeft, setSecondsLeft] = useState(90);
+  const [isPaused, setIsPaused] = useState(true);
 
   const unrenderSnow = (oldBackground: string) => {
     const elements = document.getElementsByClassName('snowflake');
@@ -56,32 +57,58 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
   //       })
   // }, []);
 
-  let intervalId: any;
-  useEffect(() => {
-    console.log('hey ennntering here');
-    intervalId = setInterval(() => {
-      setSecondsLeft((left) => {
-        const next = left - 1;
 
-        // lets reset the time
-        if (next <= 0) {
-          setRestTime();
-          handleClose();
-          clearInterval(intervalId);
-          intervalId = 0;
-        }
-        return next;
-      });
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, []);
+  // useEffect(() => {
+  //   console.log('hey ennntering here');
+  //   intervalId = setInterval(() => {
+  //     setSecondsLeft((left) => {
+  //       const next = left - 1;
+
+  //       // lets reset the time
+  //       if (next <= 0) {
+  //         setRestTime();
+  //         handleClose();
+  //         clearInterval(intervalId);
+  //         intervalId = 0;
+  //       }
+  //       return next;
+  //     });
+  //   }, 1000);
+  //   return () => clearInterval(intervalId);
+  // }, []);
+
+  let intervalId: any = React.useRef;
+  const setResetTimer = (set: boolean) => {
+    if(set) {
+      intervalId.current = setInterval(() => {
+        setSecondsLeft((left) => {
+          const next = left - 1;
+  
+          // lets reset the time
+          if (next <= 0) {
+            setRestTime();
+            handleClose();
+            clearInterval(intervalId);
+            intervalId = 0;
+          }
+          return next;
+        });
+      }, 1000);
+    } else {
+      console.log(`pause ${intervalId}`)
+      clearInterval(intervalId.current);
+    }
+    setIsPaused(!set)
+  }
+
 
   const handlePlay = () => {
-    console.log('playy')
+    setResetTimer(true)
   }
 
   const handlePause = () => {
-    console.log('pauseee')
+    console.log('pause')
+    setResetTimer(false)
   }
 
   return (
@@ -103,10 +130,10 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
             {(secondsLeft%60) > 0 ? `${Math.floor(secondsLeft%60)}` : ':00'}
           </div>
           <div className="controls">
-            <button onClick={handlePlay}>
+            <button onClick={handlePlay} disabled={!isPaused}>
               <i className="bi bi-play-circle-fill"></i>
             </button>
-            <button onClick={handlePause}>
+            <button onClick={handlePause} disabled={isPaused}> 
               <i className="bi bi-pause-circle-fill"></i>
             </button>
             <button onClick={handleClose}>

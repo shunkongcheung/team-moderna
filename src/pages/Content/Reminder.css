@@ -48,8 +48,18 @@
 }
 
 .controls i {
-    padding: 0 5px;
     font-size: 25px;
+}
+
+.controls button {
+    background-color: transparent;
+    border: none;
+}
+
+.controls button:hover {
+    background-color: transparent;
+    border: none;
+    color: #444;
 }
 
 /*------------------------------------------------------------*/

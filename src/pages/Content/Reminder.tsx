@@ -49,32 +49,40 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
   //     });
   //   }, []);
 
-  React.useEffect(() => {
-      getRestMinute().then((result)=>{
-        console.log(result.restMinute)
-        setSecondsLeft(result.restMinute)
-        })
-  }, []);
+  // React.useEffect(() => {
+  //     getRestMinute().then((result)=>{
+  //       console.log(result.restMinute)
+  //       setSecondsLeft(result.restMinute)
+  //       })
+  // }, []);
 
   let intervalId: any;
-  // useEffect(() => {
-  //   console.log('hey ennntering here');
-  //   intervalId = setInterval(() => {
-  //     setSecondsLeft((left) => {
-  //       const next = left - 1;
+  useEffect(() => {
+    console.log('hey ennntering here');
+    intervalId = setInterval(() => {
+      setSecondsLeft((left) => {
+        const next = left - 1;
 
-  //       // lets reset the time
-  //       if (next <= 0) {
-  //         setRestTime();
-  //         handleClose();
-  //         clearInterval(intervalId);
-  //         intervalId = 0;
-  //       }
-  //       return next;
-  //     });
-  //   }, 1000);
-  //   return () => clearInterval(intervalId);
-  // }, []);
+        // lets reset the time
+        if (next <= 0) {
+          setRestTime();
+          handleClose();
+          clearInterval(intervalId);
+          intervalId = 0;
+        }
+        return next;
+      });
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const handlePlay = () => {
+    console.log('playy')
+  }
+
+  const handlePause = () => {
+    console.log('pauseee')
+  }
 
   return (
     <>
@@ -87,14 +95,23 @@ const Reminder: React.FC<ReminderProps> = ({ oldBackground }) => {
         </div>
         <div className="timerContainer">
           <div className="time">
-            <i className="bi bi-clock-history"></i>
-            {(secondsLeft/3) > 0 ? `${secondsLeft / 3}:` : '00:'}
-            {(secondsLeft%3) > 0 ? secondsLeft%3 : '00'}
+          <i className="bi bi-clock"></i>
+            {((secondsLeft/60) > 0 && (secondsLeft/60) <= 9) ? '0' : ''}
+            {(secondsLeft/60) > 0 ? `${Math.floor(secondsLeft / 60)}` : '00'}
+            :
+            {((secondsLeft%60) > 0 && (secondsLeft%60) <= 9) ? '0' : ''}
+            {(secondsLeft%60) > 0 ? `${Math.floor(secondsLeft%60)}` : ':00'}
           </div>
           <div className="controls">
-            <i className="bi bi-play-circle-fill"></i>
-            <i className="bi bi-stop-circle-fill"></i>
-            <i className="bi bi-stop-circle-fill"></i>
+            <button onClick={handlePlay}>
+              <i className="bi bi-play-circle-fill"></i>
+            </button>
+            <button onClick={handlePause}>
+              <i className="bi bi-pause-circle-fill"></i>
+            </button>
+            <button onClick={handleClose}>
+              <i className="bi bi-stop-circle-fill"></i>
+            </button>
           </div>
         </div>
       </div>

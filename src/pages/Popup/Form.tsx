@@ -61,14 +61,16 @@ const Form: React.FC<FormProps> = ({ handleFinish }) => {
           </div>
           <div id="workHelp" className="form-text">
             {console.log(formValue)}
-            <p><small>
-              You {formValue.reminder ? 'will' : `won't`} get a notification message when the timer stops.
-            </small></p>
+            {formValue.reminder &&
+              <p><small>
+                You will get a notification when the timer stops.
+              </small></p>
+            }
           </div>
           </div>
           <div className="mb-3 row pr-0">
             <label htmlFor="interval" className="col-8 col-form-label">
-              Break Inteval
+              Break Interval
             </label>
             <div className="col-4">
               <select
@@ -108,6 +110,7 @@ const Form: React.FC<FormProps> = ({ handleFinish }) => {
                   setFv((o) => ({ ...o, restMinute: Number(target.value) }))
                 }
               >
+                <option value="1" selected={formValue.restMinute === 1}>1 min</option>
                 <option value="10" selected={formValue.restMinute === 10}>10 min</option>
                 <option value="15" selected={formValue.restMinute === 15}>15 min</option>
                 <option value="20" selected={formValue.restMinute === 20}>20 min</option>
@@ -115,7 +118,7 @@ const Form: React.FC<FormProps> = ({ handleFinish }) => {
             </div>
             <div id="restHelp" className="form-text">
               <p><small>
-                Take a break of {formValue.restMinute} minutes. take it easy!
+                Take a break of {formValue.restMinute} minutes. Take it easy!
               </small></p>
             </div>
           </div>
